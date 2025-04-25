@@ -8,6 +8,7 @@ const app = express();
 const productsController =
   new ProductsController();
 
+app.use(express.static('public'))
 app.use(ejsLayouts);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -26,6 +27,8 @@ app.get(
   '/update-product/:id',
   productsController.getUpdateProductView
 );
+app.post("/delete-product/:id",productsController.deleteProduct)
+
 app.post(
   '/',
   validationMiddleware,
